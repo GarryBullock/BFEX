@@ -6,9 +6,11 @@ from bfex.models import initialize_models
 
 def create_app():
     from elasticsearch_dsl.connections import connections
-    connections.create_connection(hosts=["localhost"])
-
+    
     app = Flask("bfex")
+    
+    elastic_host = os.environ["ELASTIC_HOST"]
+    connections.create_connection(hosts=[elastic_host])
 
     initialize_models()
 
@@ -16,4 +18,4 @@ def create_app():
 
     return app
 
-
+app = create_app()

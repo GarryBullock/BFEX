@@ -1,0 +1,40 @@
+version: '2'
+services:
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.1
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_UPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elastic/data
+    ports:
+      - 9200:9200
+  
+  bfex:
+    build: ./web
+    restart: always
+    expose:
+      - "8000"
+    command: ["./bin/wait_for_elastic.sh", "elastic", "/opt/conda/envs/BFEX/bin/gunicorn -w 2 -b :8000 bfex.app:app"]
+    depends_on:
+      - elastic
+    environment:
+      ELASTIC_HOST: elastic
+  
+  nginx:
+    build: ./nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - bfex
+
+volumes:
+  esdata:
+    driver: local

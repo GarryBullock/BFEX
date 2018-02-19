@@ -63,16 +63,16 @@ def initialize_models():
     Publication.init()
 
 
-if __name__ == "__main__":
-    from elasticsearch_dsl.connections import connections
-    connections.create_connection(hosts=["localhost"])
+# if __name__ == "__main__":
+#     from elasticsearch_dsl.connections import connections
+#     connections.create_connection(hosts=["localhost"])
 
-    Faculty.init()
+#     Faculty.init()
 
-    prof = Faculty(meta={'id': 42}, name="Garry Bullock", email="gbullock@ualberta.ca", faculty_id=42)
-    prof.save()
+#     prof = Faculty(meta={'id': 42}, name="Garry Bullock", email="gbullock@ualberta.ca", faculty_id=42)
+#     prof.save()
 
-    saved_prof = Faculty.get(id=42)
-    print(saved_prof.name)
+#     saved_prof = Faculty.get(id=42)
+#     print(saved_prof.name)
 
-    print(connections.get_connection().cluster.health())
+#     print(connections.get_connection().cluster.health())
