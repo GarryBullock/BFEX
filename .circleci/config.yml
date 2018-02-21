@@ -5,22 +5,6 @@ jobs:
       - image: continuumio/miniconda
 
     steps:
-      # - run:
-      #     name: Install Docker Compose
-      #     command: |
-      #       curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-      #       chmod +x ~/docker-compose
-      #       mv ~/docker-compose /usr/local/bin/docker-compose
-      
-      # - run:
-      #     name: Install Docker client
-      #     command: |
-      #       set -x
-      #       VER="17.03.0-ce"
-      #       curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-      #       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-      #       mv /tmp/docker/* /usr/bin
-
       - checkout
 
       - run:
@@ -44,28 +28,14 @@ jobs:
             set -x
             ssh-keyscan ${DEPLOY_IP} > ~/.ssh/known_hosts
 
-      - run:
-          name: Deploy
-          command: |
-            set -x
-            rsync -avr -e ssh --exclude=".*/" . ${DEPLOY_USER}@${DEPLOY_IP}:~/BFEX
-            ssh ${DEPLOY_USER}@${DEPLOY_IP} << EOF
-              cd BFEX;
-              sudo docker-compose down --remove-orphans
-              sudo docker-compose build
-              sudo docker-compose up -d
-            EOF
-
-      # - setup_remote_docker
-
       # - run:
-      #     name: Build docker image
+      #     name: Deploy
       #     command: |
       #       set -x
-      #       docker-compose -f docker-compose.ci.yml build
-      
-      # - run:
-      #     name: Start Test Server
-      #     command: |
-      #       set -x
-      #       docker-compose -f docker-compose.ci.yml up -d
+      #       rsync -avr -e ssh --exclude=".*/" . ${DEPLOY_USER}@${DEPLOY_IP}:~/BFEX
+      #       ssh ${DEPLOY_USER}@${DEPLOY_IP} << EOF
+      #         cd BFEX;
+      #         sudo docker-compose down --remove-orphans
+      #         sudo docker-compose build
+      #         sudo docker-compose up -d
+      #       EOF
