@@ -1,0 +1,38 @@
+{
+  "name": "bfex-ui",
+  "version": "0.0.1",
+  "description": "Simple UI for find an expert",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server --progress",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "webpack": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-router-dom": "^4.2.4",
+    "@types/reactstrap": "^5.0.19",
+    "awesome-typescript-loader": "^3.5.0",
+    "bootstrap": "^4.0.0",
+    "css-loader": "^0.28.10",
+    "jquery": "^3.3.1",
+    "node-sass": "^4.7.2",
+    "popper.js": "^1.12.9",
+    "sass-loader": "^6.0.7",
+    "source-map-loader": "^0.2.3",
+    "style-loader": "^0.20.2",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2",
+    "typings": "^2.1.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0"
+  }
+}

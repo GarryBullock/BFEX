@@ -1,0 +1,40 @@
+html {
+    font-size: 82.5%;
+  }
+  
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size;
+    padding-top: 54px;
+  }
+  
+  @media (min-width: 992px) {
+    body {
+      padding-top: 56px;
+    }
+  }
+  
+  .navbar-nav {
+    font-size: $s-size
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    cursor: default;
+  }
+  
+  .is-active {
+    font-weight: bold;
+  }
+  
+  .col-centered {
+    float: none;
+    margin: 0 auto;
+  }
+  
+  input {
+    text-align: center
+  }
