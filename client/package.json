@@ -10,7 +10,9 @@
     "build": "webpack"
   },
   "dependencies": {
+    "@types/react-bootstrap": "^0.32.6",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "webpack": "^4.1.0"

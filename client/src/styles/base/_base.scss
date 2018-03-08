@@ -1,40 +1,58 @@
 html {
     font-size: 82.5%;
-  }
-  
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
   body {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: $m-size;
-    padding-top: 54px;
+    padding-top: 56px;
   }
-  
-  @media (min-width: 992px) {
-    body {
-      padding-top: 56px;
-    }
-  }
-  
-  .navbar-nav {
-    font-size: $s-size
-  }
-  
-  button {
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    cursor: default;
-  }
-  
-  .is-active {
-    font-weight: bold;
-  }
-  
-  .col-centered {
-    float: none;
-    margin: 0 auto;
-  }
-  
-  input {
-    text-align: center
-  }
+}
+
+.navbar-nav {
+  font-size: $s-size
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.is-active {
+  font-weight: bold;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+input {
+  text-align: center
+}
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    width: 400px; /*whatever width you want*/
+}

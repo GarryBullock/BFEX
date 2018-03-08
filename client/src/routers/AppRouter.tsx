@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 
 import Header from '../components/Header';
-import { Hello } from '../components/Hello';
+import HomePage from '../components/Homepage';
 
 export default class AppRouter extends React.Component<{}, {}> {
     render() {
@@ -11,7 +11,7 @@ export default class AppRouter extends React.Component<{}, {}> {
                 <div>
                     <Header />
                     <Switch>
-                        <Route path="/" component={Hello}/>
+                        <Route path="/" component={HomePage}/>
                     </Switch>
                 </div>
             </BrowserRouter>);
