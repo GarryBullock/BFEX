@@ -44,6 +44,10 @@ class ResearchIdPageScrape(Task):
             .query("match", source="ResearchId") \
             .delete()
 
+        Keywords.search().query('match', faculty_id=faculty.faculty_id) \
+            .query("match", approach_id="4") \
+            .delete()
+
         print("Running researchid scrape on {}. Research id {}."
                 .format(faculty_name, faculty.research_id))
 
