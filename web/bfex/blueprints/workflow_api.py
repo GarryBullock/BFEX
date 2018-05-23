@@ -37,6 +37,26 @@ class WorkflowAPI(Resource):
 
         return 200
         
+class BatchWorkflowAPI(Resource):
+    def post(self):
+        to_run = request.args.get('run')
+
+        if not to_run:
+            abort(400)
+
+        try:
+            task_list = TASKLIST[to_run]
+        except:
+            abort(400)
+
+        faculty = Faculty.search().scan()
+
+        for f in faculty:
+            workflow = Workflow(task_list, f)
+            run_workflow.apply_async((workflow,), countdown=1)
+
+        return 200
 
 
 api.add_resource(WorkflowAPI, '/workflow')
+api.add_resource(BatchWorkflowAPI, '/workflow/batch')

@@ -31,19 +31,22 @@ class LexiconApproach(KeyGenerationApproach):
         bigrams = list(nltk.bigrams(tokens))
         trigrams = list(nltk.trigrams(tokens))
 
-        for word in words:
-            if (word in lexicon) and (word not in keywords):
-                keywords.append(word)
+        for keyword in lexicon:
+            if keyword in text:
+                keywords.append(keyword)
+        # for word in words:
+        #     if (word in lexicon) and (word not in keywords):
+        #         keywords.append(word)
 
-        for bigram in bigrams:
-            search_bigram = " ".join(bigram)
-            if (search_bigram in lexicon) and (search_bigram not in keywords):
-                keywords.append(search_bigram)
+        # for bigram in bigrams:
+        #     search_bigram = " ".join(bigram)
+        #     if (search_bigram in lexicon) and (search_bigram not in keywords):
+        #         keywords.append(search_bigram)
 
-        for trigram in trigrams:
-            search_trigram = " ".join(trigram)
-            if (search_trigram in lexicon) and (search_trigram not in keywords):
-                keywords.append(search_trigram)
+        # for trigram in trigrams:
+        #     search_trigram = " ".join(trigram)
+        #     if (search_trigram in lexicon) and (search_trigram not in keywords):
+        #         keywords.append(search_trigram)
 
         return keywords
 

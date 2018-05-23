@@ -69,14 +69,14 @@ class Grant(DocType):
     Data is saved in the elaticsearch index grants.
     """
     faculty_id = Integer(required=True)
-    grant_id = Integer()                    # grant_id is the provided id in the json data dump. May not be useful.
+    source = Text(required=True)
+    title = Text()
+    text = Text()
 
-    application_title = Text()
-    application_area_group = Text()
+    application_group = Text()
+    application_group_fr = Text()
     application_area = Text()
-    research_subject = Text()
-
-    co_applicants = Integer()
+    application_area_fr = Text()
 
     class Meta:
         index = "grants"

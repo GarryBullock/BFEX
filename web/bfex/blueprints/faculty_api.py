@@ -1,10 +1,10 @@
 from flask import Blueprint, abort, render_template, make_response, request
 from flask_restful import Resource, Api
 
-from bfex.models import Faculty
+from bfex.models import Faculty, Keywords, Document, Grant
 from bfex.components.data_ingestor import DataIngester
 from bfex.common.exceptions import DataIngestionException
-from bfex.common.schema import FacultySchema
+from bfex.common.schema import FacultySchema, KeywordSchema, GrantSchema, FacultyForumSchema
 from bfex.blueprints.api_utils import paginate_query
 
 MB = 1024 * 1024
@@ -85,6 +85,45 @@ class FacultyListAPI(Resource):
         return 200
 
 
+class DataDumpAPI(Resource):
+    """Methods for performing some operations on lists of Faculty members."""
+
+    def get(self):
+        """HTTP Get for the faculty list resource.
+
+        Returns a list of faculty members from elasticsearch.
+        :param page: URL Parameter for the page to fetch. Default - 0.
+        :param results: URL Parameter for the number of results to return per page. Default - 20.
+        :return:
+        """
+        search = Faculty.search()
+        # query = search
+        # query, pagination_info = paginate_query(request, search)
+        response = search.scan()
+
+        schema = FacultyForumSchema()
+        results = []
+        for faculty in response:
+            key_search = Keywords.search().query('match', faculty_id=faculty.faculty_id) \
+                .query('match', approach_id=4) \
+                .execute()
+            generated_key_search = Keywords.search().query('match', faculty_id=faculty.faculty_id) \
+                .query('match', approach_id=5)
+            grant_search = Grant.search().query('match', faculty_id=faculty.faculty_id) \
+                .execute()  
+
+            faculty.scraped_keywords = key_search
+            faculty.generated_keywords = generated_key_search
+            faculty.grants = grant_search
+
+            results.append(schema.dump(faculty))
+
+        return {
+            # "pagination": pagination_info,
+            "data": results
+        }
+
+
 api.add_resource(FacultyAPI, '/faculty/<int:faculty_id>')
 api.add_resource(FacultyListAPI, '/faculty')
-
+api.add_resource(DataDumpAPI, '/faculty/dump')

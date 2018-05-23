@@ -46,6 +46,8 @@ class GetKeywordsFromScrape(Task):
             keys = key_generator.generate_keywords(document.text)
 
             for approach in keys:
+                if len(keys[approach]) == 0:
+                    continue
                 keywords = Keywords()
                 keywords.faculty_id = document.faculty_id
                 keywords.datasource = document.source

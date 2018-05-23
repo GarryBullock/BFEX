@@ -11,13 +11,17 @@ UNIVERSITY_COLUMN = 4
 GRANT_STRUCTURE = OrderedDict([
     ("faculty_name",  1),
     ("university", 4),
+    ("application_group", 21),
+    ("application_group_fr", 22),
+    ("application_area", 23),
+    ("application_area_fr", 24),
     ("title", 34),
     ("summary", 36)
 ])
 
 UOFA = "University of Alberta"
 
-with open(in_csv, 'r', encoding="utf-8") as csv_file, open(out_json, 'w', encoding="utf-8") as json_out:
+with open(in_csv, 'r', encoding="iso-8859-1") as csv_file, open(out_json, 'w', encoding="utf-8") as json_out:
     in_reader = csv.reader(csv_file)
 
     out = []

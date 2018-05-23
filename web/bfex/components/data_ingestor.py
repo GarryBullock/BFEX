@@ -87,9 +87,10 @@ class DataIngester(object):
 
         # TODO: There is no spot for titles in the document...
         grant_doc = Document(faculty_id=faculty.faculty_id, source=grant["source"], text=grant["text"])
-
+        grant = Grant(faculty_id=faculty.faculty_id, **grant)
         if write:
             grant_doc.save()
+            grant.save()
         
 
     @staticmethod
